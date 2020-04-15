@@ -1,12 +1,16 @@
-const { PDFDocument } = require('pdf-lib');
+const { PDFDocument , StandardFonts, rgb} = require('pdf-lib');
 
 const fs = require('fs');
 
-/*createPDF().catch(err => {
+createPDF().catch(err => {
     console.log(err);
-});*/
+});
 
 mergePDFDocs().catch(err => {
+    console.log(err);
+});
+
+addPageNumber().catch(err => {
     console.log(err);
 });
 
@@ -55,4 +59,31 @@ async function mergePDFDocs() {
 
     fs.writeFileSync('./test2.pdf', await mergedDoc.save());
 
+}
+
+async function addPageNumber() {
+    
+    //read the contents of the file
+    const content  = await PDFDocument.load(fs.readFileSync('./test2.pdf'));
+
+    //Add a font to the document
+    const helveticaFont = content.embedFont(StandardFonts.Helvetica);
+
+    
+    //Draw a line at the bottone of each page
+    //Note that the botton of the page is 
+
+    const pages = await content.getPages();
+    for(const [i, page] of Object.entries(pages)){
+        page.drawText(`${+i +1}`, {
+            x:page.getWidth() / 2,
+            y:10,
+            size: 15,
+            font: helveticaFont,
+            color: rgb(0,0,0)
+        });
+    }
+
+    //Write the pdf to a file
+    fs.writeFileSync('./test_pagesNumbers.pdf', await content.save());
 }
