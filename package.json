@@ -1,0 +1,19 @@
+{
+  "name": "pdf-nodejs",
+  "version": "1.0.0",
+  "description": "testing pdf-lib with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/306825/pdf-nodejs.git"
+  },
+  "author": "Mbongeni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/306825/pdf-nodejs/issues"
+  },
+  "homepage": "https://github.com/306825/pdf-nodejs#readme"
+}
